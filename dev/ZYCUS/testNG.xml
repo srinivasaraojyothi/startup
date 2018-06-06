@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+  
+<suite name="ZYCUS API Testing" verbose="1" >
+<!--   	<listeners>
+		<listener class-name="Schneider.SandC.OrederingFunctions" />
+		<listener class-name="Schneider.SandC.ExtentReporterNG" />
+		<listener class-name="Schneider.SandC.TestNGReportListner" />
+	</listeners> -->
+  <test name="ZYCUS API Testing" preserve-order="true" >
+
+  
+    <classes>
+    <class name="zycus.assignment.utilities.MethodCalling" />
+    </classes>
+  </test>
+
+  
+</suite>
