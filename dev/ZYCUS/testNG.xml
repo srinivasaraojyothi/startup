@@ -1,7 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
   
 <suite name="ZYCUS API Testing" verbose="1" >
-
+  	<listeners>
+		<listener class-name="zycus.assignment.utilities.OrederingFunctions" />
+		<listener class-name="zycus.assignment.utilities.ExtentReporterNG" />
+		<listener class-name="zycus.assignment.utilities.FailTestCaseRetry" />
+		
+	</listeners>
   <test name="ZYCUS API Testing" preserve-order="true" >
 
   

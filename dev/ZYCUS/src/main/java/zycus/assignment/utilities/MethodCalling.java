@@ -2,7 +2,6 @@ package zycus.assignment.utilities;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,8 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.testng.annotations.Factory;
+
+import zycus.assignment.common.POSTCreateCustomer;
 
 public class MethodCalling {
 	ArrayList<Cell> testDataSheetSarray = new ArrayList<Cell>();
@@ -40,10 +41,10 @@ public class MethodCalling {
 
 			String grade = testDataSheetSarray.get(testDataSheetSarrayIteration).toString();
 			//System.out.println(testDataSheetSarray.get(testDataSheetSarrayIteration).toString()+"   <====>:  "+testDataSheetSarrayIteration );
-			log.info(testDataSheetSarray.get(testDataSheetSarrayIteration).toString()+"   <====>:  "+testDataSheetSarrayIteration);
+			//log.info(testDataSheetSarray.get(testDataSheetSarrayIteration).toString()+"   <====>:  "+testDataSheetSarrayIteration);
 			switch (grade) {
 			case "POST":
-
+				
 				try {
 					String testCase = testDataSheetSarray.get(testDataSheetSarrayIteration - 2).toString();
 					String testStep = testDataSheetSarray.get(testDataSheetSarrayIteration - 1).toString();
@@ -53,13 +54,24 @@ public class MethodCalling {
 							Integer.parseInt(testDataSheetSarray.get(testDataSheetSarrayIteration + 3).toString()))
 									.toString();
 					String expectedOutput = testDataSheetSarray.get(testDataSheetSarrayIteration + 4).toString();
-					File fileOauthToken = new File(properties.getProperty("fileAuthTokenFileLocation"));
-					FileReader readerfileOauthToken = new FileReader(fileOauthToken);
+					String[] apiurlSplitArray=apiurl.split("/");
+					
+if(apiurlSplitArray[apiurlSplitArray.length-1].equalsIgnoreCase("customers")){
 
 
-					if (payLoad.isEmpty() == true) {
+					if (!payLoad.isEmpty()) {
+						//System.out.println("*********Testing************");
+						FunctionOrder=FunctionOrder+1;
+						
+						methodObjects.add(new POSTCreateCustomer(testCase,testStep, apiurl, payLoad, expectedHTTPcode,
+								expectedOutput,  FunctionOrder));
+						
 						
 					} else if (payLoad.isEmpty() != true) {}
+					
+}
+					
+					
 
 				} catch (Exception e) {
 
@@ -77,8 +89,7 @@ public class MethodCalling {
 						Integer.parseInt(testDataSheetSarray.get(testDataSheetSarrayIteration + 3).toString()))
 								.toString();
 				String expectedOutput = testDataSheetSarray.get(testDataSheetSarrayIteration + 4).toString();
-				File fileOauthToken = new File(properties.getProperty("fileAuthTokenFileLocation"));
-				FileReader readerfileOauthToken = new FileReader(fileOauthToken);
+
 				try {} catch (Exception e) {
 
 					e.printStackTrace();

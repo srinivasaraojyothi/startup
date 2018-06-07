@@ -23,6 +23,7 @@ public class GETbyCustomerId extends AbstactcommonClass {
 
 
 	String pageFlag = null;
+	String TestCase;
 	String TestStep;
 	String apiurl;
 	String payLoad;
@@ -30,8 +31,9 @@ public class GETbyCustomerId extends AbstactcommonClass {
 	String expectedOutput;
 	String oAuthToken;
 
-	public GETbyCustomerId(String TestStep, String apiurl, String expectedHTTPcode, String expectedOutput,
+	public GETbyCustomerId(String TestCase,String TestStep, String apiurl, String expectedHTTPcode, String expectedOutput,
 			 int order) {
+		this.TestCase=TestCase;
 		this.TestStep = TestStep;
 		this.apiurl = apiurl;
 	//	this.payLoad = payLoad;
@@ -64,5 +66,10 @@ public class GETbyCustomerId extends AbstactcommonClass {
 	@Override
 	public String getExpectedDATAresult() {
 		return expectedOutput;
+	}
+	@Override
+	public String getTestCase() {
+		
+		return TestCase;
 	}
 }

@@ -4,7 +4,7 @@ public abstract class AbstactcommonClass {
 	protected int order;
 
 	public abstract int getOrder();
-
+	public abstract String getTestCase();
 	public abstract String getTestStep();
 
 	public abstract String getExpectedresult();

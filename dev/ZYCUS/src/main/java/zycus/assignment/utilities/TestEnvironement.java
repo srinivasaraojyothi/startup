@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 public class TestEnvironement {
 	
 	static Logger log = Logger.getLogger(TestEnvironement.class.getName());
-	public Map<String,String> baseURL(){
+	public static Map<String,String> baseURL(){
 		Map<String,String> envVeraibleMap=new HashMap<String,String>(); 
 	  String BASE_URL=null;
 	  
@@ -29,12 +29,15 @@ public class TestEnvironement {
 			if(env.equalsIgnoreCase("vnv")){
 					
 				envVeraibleMap.put("BASE_URL", properties.getProperty("baseURL_vnv"));
+				envVeraibleMap.put("inputFiles", properties.getProperty("InputFilesLocation"));
 				log.info(BASE_URL+ " : is the base url");
 				
 				return envVeraibleMap;
 			}
 			else if(env.equalsIgnoreCase("sqe")){
 	
+				envVeraibleMap.put("BASE_URL", properties.getProperty("baseURL_sqe"));
+				envVeraibleMap.put("inputFiles", properties.getProperty("InputFilesLocation"));
 				log.info(BASE_URL+ " : is the base url");
 				
 				return envVeraibleMap;
