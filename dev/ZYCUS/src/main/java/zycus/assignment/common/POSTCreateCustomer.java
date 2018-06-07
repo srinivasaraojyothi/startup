@@ -1,15 +1,17 @@
 package zycus.assignment.common;
 
+import java.io.File;
 import java.io.FileInputStream;
-import java.util.Properties;
 
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Response;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import javax.ws.rs.core.Response;
+
 import zycus.assignment.core.POST;
 import zycus.assignment.utilities.AbstactcommonClass;
 import zycus.assignment.utilities.ExcelDataTest;
@@ -21,25 +23,25 @@ import zycus.assignment.utilities.TestEnvironement;
  * Description: Function for creating customer profile.
  */
 public class POSTCreateCustomer extends AbstactcommonClass {
-	Properties properties = new Properties();
-	static Logger log = Logger.getLogger(POSTCreateCustomer.class.getName());
 	
+	static Logger log = Logger.getLogger(POSTCreateCustomer.class.getName());
+	StoringCustomerIDsTofiles stroringIDstoFiles=new StoringCustomerIDsTofiles();
 	ExcelDataTest edt = new ExcelDataTest();
 	String TestCase;
 	String TestStep;
 	String apiurl;
 	String payLoadFileName;
-	String expectedHTTPcode;
+	String expectedHTTPMessage;
 	String expectedOutput;
 	String oAuthToken;
 
-	public POSTCreateCustomer(String TestCase,String TestStep, String apiurl, String payLoadFileName, String expectedHTTPcode,
+	public POSTCreateCustomer(String TestCase,String TestStep, String apiurl, String payLoadFileName, String expectedHTTPMessage,
 			String expectedOutput,  int order) {
 		this.TestCase= TestCase;
 		this.TestStep = TestStep;
 		this.apiurl = apiurl;
 		this.payLoadFileName = payLoadFileName;
-		this.expectedHTTPcode = expectedHTTPcode;
+		this.expectedHTTPMessage = expectedHTTPMessage;
 		this.expectedOutput = expectedOutput;
 		this.order = order;
 	}
@@ -53,14 +55,32 @@ public class POSTCreateCustomer extends AbstactcommonClass {
 		String inputStreamString=IOUtils.toString(fis);
 		Entity<String> entityString=Entity.json(inputStreamString);
 		System.out.println(entityString.getEntity());
-		
+		JSONObject jsonOfHttpMessage=new JSONObject(expectedHTTPMessage);
+		JSONObject jsonOfHttpEntityMessage=new JSONObject(expectedOutput);
 		Response postResponse=new POST().post(url, entityString);
 		
-		Assert.assertEquals(Integer.toString(postResponse.getStatus()), expectedHTTPcode);
-
 		
-		//System.out.println(url+"   :   "+customerCreationPayLoadFile);
+		Assert.assertEquals(Integer.toString(postResponse.getStatus()), jsonOfHttpMessage.get("HttpsStatusCode").toString());
+		Assert.assertEquals(postResponse.getStatusInfo().toString(), jsonOfHttpMessage.get("HttpsStatusInfo").toString());
+		String[] splitHeaderInfo = postResponse.getLocation().toString().split("/");
+if(!postResponse.getHeaderString("Location").isEmpty()){
+		stroringIDstoFiles.storingCustomerIDsTofiles(new File(TestEnvironement.baseURL().get("inputFiles")+"customerID.json"), splitHeaderInfo[splitHeaderInfo.length-1].toString());
+		//String messageBody=postResponse.readEntity(String.class);
+
+}
+else{
+	JSONObject jsonOfmessageBody=new JSONObject(postResponse.readEntity(String.class));
+	if(jsonOfmessageBody.get("code").toString().equalsIgnoreCase(jsonOfHttpEntityMessage.get("code").toString())
+	&&jsonOfmessageBody.get("message").toString().equalsIgnoreCase(jsonOfHttpEntityMessage.get("message").toString())){
 		Assert.assertTrue(true);
+		
+	}
+	else{
+		Assert.assertTrue(false);
+	}
+	
+}
+
 		}
 		catch(Exception e){
 			log.info(e);
@@ -82,7 +102,7 @@ public class POSTCreateCustomer extends AbstactcommonClass {
 
 	@Override
 	public String getExpectedresult() {
-		return expectedHTTPcode;
+		return expectedHTTPMessage;
 	}
 
 	@Override

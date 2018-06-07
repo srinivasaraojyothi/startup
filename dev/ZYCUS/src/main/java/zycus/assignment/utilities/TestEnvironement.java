@@ -30,6 +30,7 @@ public class TestEnvironement {
 					
 				envVeraibleMap.put("BASE_URL", properties.getProperty("baseURL_vnv"));
 				envVeraibleMap.put("inputFiles", properties.getProperty("InputFilesLocation"));
+				envVeraibleMap.put("customerIdInfo", properties.getProperty("customerIdInfoFile"));
 				log.info(BASE_URL+ " : is the base url");
 				
 				return envVeraibleMap;
@@ -38,6 +39,8 @@ public class TestEnvironement {
 	
 				envVeraibleMap.put("BASE_URL", properties.getProperty("baseURL_sqe"));
 				envVeraibleMap.put("inputFiles", properties.getProperty("InputFilesLocation"));
+				envVeraibleMap.put("customerIdInfo", properties.getProperty("customerIdInfoFile"));
+
 				log.info(BASE_URL+ " : is the base url");
 				
 				return envVeraibleMap;
