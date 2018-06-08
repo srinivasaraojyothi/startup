@@ -1,4 +1,4 @@
-package zycus.assignment.common;
+package zycus.assignment.utilities;
 
 import java.io.BufferedWriter;
 import java.io.File;
