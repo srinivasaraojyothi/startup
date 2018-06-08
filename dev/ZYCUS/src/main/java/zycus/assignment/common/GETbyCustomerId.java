@@ -77,8 +77,11 @@ else{
 }
 }
 
-else if(jsonOfmessageBody.has("status")){
-	if(jsonOfmessageBody.get("status").toString().equalsIgnoreCase(jsonOfHttpEntityMessage.get("status").toString())){
+else if(jsonOfmessageBody.has("customerstatus")){
+	if(jsonOfmessageBody.get("customerstatus").toString().equalsIgnoreCase(jsonOfHttpEntityMessage.get("customerstatus").toString())
+	&&jsonOfmessageBody.get("customername").toString().equalsIgnoreCase(jsonOfHttpEntityMessage.get("customername").toString())
+	&&jsonOfmessageBody.get("email").toString().equalsIgnoreCase(jsonOfHttpEntityMessage.get("email").toString())
+	&&jsonOfmessageBody.get("mobilenumber").toString().equalsIgnoreCase(jsonOfHttpEntityMessage.get("mobilenumber").toString())){
 		Assert.assertTrue(true);
 		
 	}

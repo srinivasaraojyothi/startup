@@ -31,6 +31,7 @@ public class TestEnvironement {
 				envVeraibleMap.put("BASE_URL", properties.getProperty("baseURL_vnv"));
 				envVeraibleMap.put("inputFiles", properties.getProperty("InputFilesLocation"));
 				envVeraibleMap.put("customerIdInfo", properties.getProperty("customerIdInfoFile"));
+				envVeraibleMap.put("testCaseLocation", properties.getProperty("TestCaseSheetLocation"));
 				log.info(BASE_URL+ " : is the base url");
 				
 				return envVeraibleMap;

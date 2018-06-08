@@ -28,9 +28,9 @@ public class ExcelDataTest {
 	// ******************************************************************************
 	// @Test
 	public ArrayList<Cell> urlsDataSheet() throws IOException {
-		FileInputStream fileInput = new FileInputStream(new File("src/main/resources/DataFilesLocations.properties"));
-		properties.load(fileInput);
-		File file = new File(properties.getProperty("excelDatasheetLocation"));
+/*		FileInputStream fileInput = new FileInputStream(new File("src/main/resources/DataFilesLocations.properties"));
+		properties.load(fileInput);*/
+		File file = new File(TestEnvironement.baseURL().get("testCaseLocation"));
 		//XSSFSheet sheetName=null;;
 		try {
 			FileInputStream fis = new FileInputStream(file);

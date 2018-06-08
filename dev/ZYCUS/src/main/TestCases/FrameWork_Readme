@@ -23,7 +23,8 @@ Files:src/main/TestData/Zycus-Assignment.xlsx
 
 Executing the Test Suite:
 ------------------------
-Test case sheet Zycus-Assignment.xlsx has all the test cases defined. Header columns represents Test Case,Test Step,Function,API Url,Test Data,Expected HTTPS Code,Expected HTTPS Entity Message/Body respectively. Provide the data accordingly.
+Test case sheet Zycus-Assignment.xlsx under src\main\TestCases has all the test cases defined. Header columns represents Test Case,Test Step,Function,API Url,Test Data,Expected HTTPS Code,Expected HTTPS Entity Message/Body respectively. Provide the data accordingly.
+Test data is placed under src\main\resources\InputData in .json format.
 
 Update the config.properties file with base urls.
 Run the test suite by providing maven build with -clean test -DargLine="-Denv=vnv -Dtest=Zycus-Assignment".
