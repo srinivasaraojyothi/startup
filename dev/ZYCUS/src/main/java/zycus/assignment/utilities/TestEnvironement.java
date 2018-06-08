@@ -21,7 +21,7 @@ public class TestEnvironement {
 		
 		try {
 			FileInputStream propertiesFile = new FileInputStream(
-					new File("src/main/resources/DataFilesLocations.properties"));
+					new File("src/main/resources/config.properties"));
 			properties.load(propertiesFile);
 			String env = System.getProperty("env");
 			System.out.println(env+":   ----------------------------------------");
